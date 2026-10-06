@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CoastLink Facility Booking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F7F5; --surface:#FFFFFF; --ink:#13293D; --ink-soft:#4C5E6E;
+  --line:#D9DFDB; --navy:#1C3D5A; --teal:#2F8F82; --sand:#EFE6D4;
+  --amber:#B9791E; --amber-bg:#FBF1DF; --red:#A8463A; --red-bg:#F8E8E5;
+  --grey:#70777C; --grey-bg:#EDEEEC;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  box-sizing:border-box;
+}
+:root:not([data-theme="light"]){ }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10161C; --surface:#182230; --ink:#EAF0F4; --ink-soft:#9DAEBB;
+    --line:#2A3847; --sand:#2A3340; --amber-bg:#3A2E16; --red-bg:#3A2420; --grey-bg:#23303B;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10161C; --surface:#182230; --ink:#EAF0F4; --ink-soft:#9DAEBB;
+  --line:#2A3847; --sand:#2A3340; --amber-bg:#3A2E16; --red-bg:#3A2420; --grey-bg:#23303B;
+}
+*{box-sizing:border-box;}
+html,body{margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',system-ui,sans-serif;}
+body{min-height:100%;}
+header{background:var(--navy); color:#fff; padding:18px max(16px,env(safe-area-inset-left)) 18px max(16px,env(safe-area-inset-right));
+  padding-top:calc(18px + env(safe-area-inset-top,0px)); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+header h1{font-size:17px; margin:0; font-weight:700; letter-spacing:.2px;}
+header p{margin:2px 0 0; font-size:12.5px; color:#BFD2DE;}
+nav{display:flex; gap:4px; background:rgba(255,255,255,.1); padding:4px; border-radius:10px;}
+nav button{background:transparent; border:none; color:#DCE7ED; font-size:13px; font-weight:600; padding:8px 13px; border-radius:7px; cursor:pointer; font-family:inherit;}
+nav button.active{background:#fff; color:var(--navy);}
+main{max-width:980px; margin:0 auto; padding:22px 16px 60px;}
+h2.view-title{font-size:19px; margin:0 0 4px; font-weight:700;}
+p.view-sub{color:var(--ink-soft); font-size:13.5px; margin:0 0 18px; max-width:62ch;}
+.toolbar{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px;}
+.toolbar label{font-size:12px; color:var(--ink-soft); display:block; margin-bottom:4px; font-weight:600;}
+select, input{font-family:inherit; font-size:13.5px; padding:8px 10px; border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--ink);}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px;}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px;}
+.card h3{margin:0 0 2px; font-size:15px;}
+.card .meta{font-size:12.5px; color:var(--ink-soft); margin-bottom:10px;}
+.avail{font-size:12px; font-weight:600; padding:3px 8px; border-radius:20px; display:inline-block; margin-bottom:10px;}
+.avail.open{background:var(--amber-bg); color:var(--amber);}
+.avail.free{background:#E3F1EE; color:var(--teal);}
+.slotrow{display:flex; gap:3px; margin-bottom:10px; flex-wrap:wrap;}
+.slot{font-size:10.5px; padding:3px 6px; border-radius:5px; background:var(--grey-bg); color:var(--ink-soft);}
+.slot.busy{background:var(--red-bg); color:var(--red); text-decoration:line-through;}
+button.primary{background:var(--teal); color:#fff; border:none; padding:8px 14px; border-radius:8px; font-weight:600; font-size:13px; cursor:pointer; font-family:inherit;}
+button.secondary{background:transparent; border:1px solid var(--line); color:var(--ink); padding:7px 13px; border-radius:8px; font-size:13px; cursor:pointer; font-family:inherit;}
+button.ghost-danger{background:var(--red-bg); color:var(--red); border:none; padding:6px 11px; border-radius:7px; font-size:12.5px; cursor:pointer; font-weight:600;}
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:18px; margin-top:16px; max-width:460px;}
+.panel h3{margin:0 0 12px; font-size:15px;}
+.field{margin-bottom:12px;}
+.field label{display:block; font-size:12px; font-weight:600; color:var(--ink-soft); margin-bottom:4px;}
+.field input, .field select{width:100%;}
+.row2{display:flex; gap:10px;}
+.row2 .field{flex:1;}
+.error{background:var(--red-bg); color:var(--red); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:12px;}
+.success{background:#E3F1EE; color:var(--teal); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:12px;}
+table{width:100%; border-collapse:collapse; font-size:13.5px;}
+th{text-align:left; font-size:11.5px; text-transform:none; color:var(--ink-soft); padding:8px 10px; border-bottom:1px solid var(--line); font-weight:600;}
+td{padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:middle;}
+.badge{font-size:11.5px; font-weight:700; padding:3px 9px; border-radius:20px; display:inline-block;}
+.badge.Pending{background:var(--amber-bg); color:var(--amber);}
+.badge.Approved{background:#E3F1EE; color:var(--teal);}
+.badge.Rejected{background:var(--red-bg); color:var(--red);}
+.badge.Cancelled{background:var(--grey-bg); color:var(--grey);}
+.empty{color:var(--ink-soft); font-size:13.5px; padding:20px 0;}
+.actions-cell{display:flex; gap:6px; flex-wrap:wrap;}
+::backdrop{}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>CoastLink Facility Booking</h1>
+    <p>Community Facility and Maintenance Management System — prototype</p>
+  </div>
+  <nav id="tabs">
+    <button data-view="search" class="active">Search &amp; Book</button>
+    <button data-view="mine">My Bookings</button>
+    <button data-view="staff">Staff Approvals</button>
+  </nav>
+</header>
+<main id="main"></main>
+
+<script>
+const todayISO = () => new Date().toISOString().slice(0,10);
+const addDays = (iso,n) => { const d=new Date(iso); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); };
+
+let facilities = [
+  {id:'F1', name:'Headland Sports Hall', type:'Sports Hall', location:'Headland Centre', capacity:120},
+  {id:'F2', name:'Marina Meeting Room A', type:'Meeting Room', location:'Marina Annex', capacity:16},
+  {id:'F3', name:'Dune Park Pavilion', type:'Pavilion', location:'Dune Park', capacity:60},
+  {id:'F4', name:'Seabreeze Function Room', type:'Function Room', location:'Seabreeze Centre', capacity:80},
+  {id:'F5', name:'Lighthouse Oval', type:'Sports Field', location:'Lighthouse Reserve', capacity:200},
+];
+
+let seq = 100;
+const today = todayISO();
+let bookings = [
+  {id:'B1', facilityId:'F1', date: today, start:10, end:12, requester:'Maya Chen', purpose:'Junior basketball training', status:'Approved'},
+  {id:'B2', facilityId:'F2', date: addDays(today,1), start:14, end:16, requester:'Tom Reid', purpose:'Residents committee meeting', status:'Pending'},
+  {id:'B3', facilityId:'F3', date: addDays(today,2), start:9, end:11, requester:'Aroha Price', purpose:'Community picnic setup', status:'Approved'},
+  {id:'B4', facilityId:'F1', date: addDays(today,1), start:16, end:18, requester:'Jordan Lee', purpose:'Badminton social', status:'Pending'},
+];
+
+let view = 'search';
+let selectedFacility = null;
+let searchType = 'All';
+let searchDate = today;
+let formError = '';
+let banner = '';
+let mineFilter = '';
+
+const hours = Array.from({length:13},(_,i)=>8+i); // 8..20
+
+function overlap(aS,aE,bS,bE){ return aS < bE && bS < aE; }
+
+function conflictsFor(facilityId, date, start, end, excludeId){
+  return bookings.filter(b => b.facilityId===facilityId && b.date===date &&
+    (b.status==='Pending' || b.status==='Approved') && b.id!==excludeId &&
+    overlap(start,end,b.start,b.end));
+}
+
+function busyHoursFor(facilityId, date){
+  const set = new Set();
+  bookings.filter(b=>b.facilityId===facilityId && b.date===date && (b.status==='Pending'||b.status==='Approved'))
+    .forEach(b=>{ for(let h=b.start; h<b.end; h++) set.add(h); });
+  return set;
+}
+
+function fmtHour(h){ return (h<10?'0':'')+h+':00'; }
+
+function render(){
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active', b.dataset.view===view));
+  const main = document.getElementById('main');
+  main.innerHTML = view==='search' ? renderSearch() : view==='mine' ? renderMine() : renderStaff();
+  attachHandlers();
+}
+
+function renderSearch(){
+  const types = ['All', ...new Set(facilities.map(f=>f.type))];
+  let html = `
+    <h2 class="view-title">Search facilities</h2>
+    <p class="view-sub">Check availability by type and date, then submit a booking request. Requests are reviewed by Council staff before approval.</p>
+    <div class="toolbar">
+      <div><label>Facility type</label>
+        <select id="typeFilter">${types.map(t=>`<option ${t===searchType?'selected':''}>${t}</option>`).join('')}</select>
+      </div>
+      <div><label>Date</label><input id="dateFilter" type="date" value="${searchDate}"></div>
+    </div>
+    <div class="grid">`;
+  const list = facilities.filter(f=> searchType==='All' || f.type===searchType);
+  for(const f of list){
+    const busy = busyHoursFor(f.id, searchDate);
+    const freeCount = hours.length - [...busy].filter(h=>hours.includes(h)).length;
+    html += `<div class="card">
+      <span class="avail ${freeCount>0?'free':'open'}">${freeCount} of ${hours.length} hrs free</span>
+      <h3>${f.name}</h3>
+      <div class="meta">${f.type} · ${f.location} · Capacity ${f.capacity}</div>
+      <div class="slotrow">${hours.map(h=>`<span class="slot ${busy.has(h)?'busy':''}">${h}</span>`).join('')}</div>
+      <button class="primary" data-book="${f.id}">Request booking</button>
+    </div>`;
+  }
+  html += `</div>`;
+  if(selectedFacility){
+    const f = facilities.find(x=>x.id===selectedFacility);
+    html += `<div class="panel">
+      <h3>New booking — ${f.name}</h3>
+      ${formError ? `<div class="error">${formError}</div>` : ''}
+      <div class="field"><label>Date</label><input id="bDate" type="date" value="${searchDate}"></div>
+      <div class="row2">
+        <div class="field"><label>Start</label><select id="bStart">${hours.slice(0,-1).map(h=>`<option value="${h}">${fmtHour(h)}</option>`).join('')}</select></div>
+        <div class="field"><label>End</label><select id="bEnd">${hours.slice(1).map(h=>`<option value="${h}">${fmtHour(h)}</option>`).join('')}</select></div>
+      </div>
+      <div class="field"><label>Your name</label><input id="bName" type="text" placeholder="e.g. Sam Ngata"></div>
+      <div class="field"><label>Purpose</label><input id="bPurpose" type="text" placeholder="e.g. Team training session"></div>
+      <div style="display:flex; gap:8px;">
+        <button class="primary" id="submitBooking">Submit request</button>
+        <button class="secondary" id="cancelForm">Cancel</button>
+      </div>
+    </div>`;
+  }
+  return html;
+}
+
+function renderMine(){
+  const mine = bookings.filter(b => !mineFilter || b.requester.toLowerCase().includes(mineFilter.toLowerCase()));
+  return `
+    <h2 class="view-title">My bookings</h2>
+    <p class="view-sub">Enter your name to view and manage your booking requests.</p>
+    <div class="toolbar"><div><label>Your name</label><input id="mineSearch" type="text" placeholder="e.g. Maya Chen" value="${mineFilter}"></div></div>
+    ${mine.length===0 ? `<div class="empty">No bookings found for that name yet.</div>` : `
+    <table><thead><tr><th>Facility</th><th>Date</th><th>Time</th><th>Purpose</th><th>Status</th><th></th></tr></thead>
+    <tbody>${mine.map(b=>{
+      const f = facilities.find(x=>x.id===b.facilityId);
+      const cancellable = b.status==='Pending' || b.status==='Approved';
+      return `<tr><td>${f.name}</td><td>${b.date}</td><td>${fmtHour(b.start)}–${fmtHour(b.end)}</td><td>${b.purpose}</td>
+        <td><span class="badge ${b.status}">${b.status}</span></td>
+        <td>${cancellable?`<button class="ghost-danger" data-cancel="${b.id}">Cancel</button>`:''}</td></tr>`;
+    }).join('')}</tbody></table>`}
+  `;
+}
+
+function renderStaff(){
+  const pending = bookings.filter(b=>b.status==='Pending');
+  const rows = pending.map(b=>{
+    const f = facilities.find(x=>x.id===b.facilityId);
+    const conflicts = conflictsFor(b.facilityId, b.date, b.start, b.end, b.id).filter(c=>c.status==='Approved');
+    return `<tr><td>${f.name}</td><td>${b.date}</td><td>${fmtHour(b.start)}–${fmtHour(b.end)}</td>
+      <td>${b.requester}<br><span style="color:var(--ink-soft); font-size:12px;">${b.purpose}</span></td>
+      <td>${conflicts.length? `<span class="badge Rejected">Conflicts with approved booking</span>` : `<span class="badge Approved">No conflict</span>`}</td>
+      <td class="actions-cell">
+        <button class="primary" data-approve="${b.id}" ${conflicts.length?'disabled style="opacity:.45;cursor:not-allowed;"':''}>Approve</button>
+        <button class="ghost-danger" data-reject="${b.id}">Reject</button>
+      </td></tr>`;
+  }).join('');
+  return `
+    <h2 class="view-title">Staff approvals</h2>
+    <p class="view-sub">Pending booking requests awaiting Council staff decision. Requests that conflict with an already-approved booking cannot be approved until resolved.</p>
+    ${banner ? `<div class="success">${banner}</div>` : ''}
+    ${pending.length===0 ? `<div class="empty">No pending requests right now.</div>` : `
+    <table><thead><tr><th>Facility</th><th>Date</th><th>Time</th><th>Requester</th><th>Conflict check</th><th>Decision</th></tr></thead>
+    <tbody>${rows}</tbody></table>`}
+  `;
+}
+
+function attachHandlers(){
+  document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{ view=b.dataset.view; selectedFacility=null; formError=''; banner=''; render(); });
+
+  const typeFilter = document.getElementById('typeFilter');
+  if(typeFilter) typeFilter.onchange = e=>{ searchType=e.target.value; render(); };
+  const dateFilter = document.getElementById('dateFilter');
+  if(dateFilter) dateFilter.onchange = e=>{ searchDate=e.target.value; render(); };
+
+  document.querySelectorAll('[data-book]').forEach(b=>b.onclick=()=>{ selectedFacility=b.dataset.book; formError=''; render(); });
+  const cancelForm = document.getElementById('cancelForm');
+  if(cancelForm) cancelForm.onclick = ()=>{ selectedFacility=null; formError=''; render(); };
+
+  const submitBtn = document.getElementById('submitBooking');
+  if(submitBtn) submitBtn.onclick = ()=>{
+    const date = document.getElementById('bDate').value;
+    const start = parseInt(document.getElementById('bStart').value,10);
+    const end = parseInt(document.getElementById('bEnd').value,10);
+    const name = document.getElementById('bName').value.trim();
+    const purpose = document.getElementById('bPurpose').value.trim();
+    if(!name || !purpose){ formError='Please enter your name and the purpose of the booking.'; render(); return; }
+    if(end <= start){ formError='End time must be after the start time.'; render(); return; }
+    const conflicts = conflictsFor(selectedFacility, date, start, end, null);
+    if(conflicts.length){
+      const f = facilities.find(x=>x.id===selectedFacility);
+      formError = `This slot conflicts with an existing ${conflicts[0].status.toLowerCase()} booking for ${f.name} (${fmtHour(conflicts[0].start)}–${fmtHour(conflicts[0].end)}). Please choose a different time.`;
+      render(); return;
+    }
+    seq++;
+    bookings.push({id:'B'+seq, facilityId:selectedFacility, date, start, end, requester:name, purpose, status:'Pending'});
+    selectedFacility=null; formError=''; searchDate=date;
+    render();
+  };
+
+  document.querySelectorAll('[data-cancel]').forEach(b=>b.onclick=()=>{
+    const bk = bookings.find(x=>x.id===b.dataset.cancel); if(bk) bk.status='Cancelled'; render();
+  });
+  const mineSearch = document.getElementById('mineSearch');
+  if(mineSearch){ mineSearch.oninput = e=>{ mineFilter=e.target.value; render(); }; }
+
+  document.querySelectorAll('[data-approve]').forEach(b=>b.onclick=()=>{
+    const bk = bookings.find(x=>x.id===b.dataset.approve);
+    const conflicts = conflictsFor(bk.facilityId, bk.date, bk.start, bk.end, bk.id).filter(c=>c.status==='Approved');
+    if(conflicts.length){ return; }
+    bk.status='Approved'; banner='Booking approved.'; render();
+  });
+  document.querySelectorAll('[data-reject]').forEach(b=>b.onclick=()=>{
+    const bk = bookings.find(x=>x.id===b.dataset.reject); if(bk) bk.status='Rejected'; banner='Booking rejected.'; render();
+  });
+}
+
+render();
+</script>
+</body>
+</html>
