@@ -5,6 +5,7 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 
 from flask import Flask, jsonify, request
+from contextlib import contextmanager
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -439,6 +440,7 @@ def create_app(db_path=None):
     return app
 
 
+@contextmanager
 def get_db(app):
     db_path = Path(app.config['DB_PATH'])
     db_path.parent.mkdir(parents=True, exist_ok=True)
@@ -446,7 +448,11 @@ def get_db(app):
     connection = sqlite3.connect(db_path)
     connection.row_factory = sqlite3.Row
     connection.execute('PRAGMA foreign_keys = ON')
-    return connection
+
+    try:
+        yield connection
+    finally:
+        connection.close()
 
 
 def init_db(app):
