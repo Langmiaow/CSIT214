@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CoastLink Facilities – Utilisation & Audit Dashboard</title>
+<style>
+  *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Montserrat,"Segoe UI",Arial,sans-serif;color:#111;background:#fff} body{font-size:14px}
+  .appbar{height:76px;background:#f4f6f8;border-bottom:1px solid #ddd;display:flex;align-items:center;padding:0 32px;gap:28px}.brand{flex:1}.brand h1{font-size:19px;font-weight:500;margin:0 0 3px}.brand p{margin:0;color:#6b7280;font-size:11px}.tabs{display:flex;height:76px;align-items:stretch}.tab{display:flex;align-items:center;padding:0 16px;font-size:12px;color:#5f6368;border-bottom:2px solid transparent}.tab.active{color:#1976d2;border-bottom-color:#1976d2;font-weight:600}.chip{border:1px solid #aaa;border-radius:16px;padding:4px 10px;font-size:11px;color:#555;background:#fff}
+  .page{display:grid;grid-template-columns:230px minmax(680px,1fr) 300px;gap:32px;padding:46px 32px 28px;align-items:start}h2{font-size:28px;font-weight:500;margin:0 0 6px}.lead{color:#6b7280;font-size:12px;line-height:1.45;margin:0 0 22px}.section-title{font-size:18px;font-weight:500;margin:0 0 12px}
+  label{display:block;font-size:11px;color:#666;margin:0 0 5px}.field,.select{width:100%;border:1px solid #cfcfcf;border-radius:4px;background:#fff;padding:9px 10px;font:inherit;font-size:12px;color:#222}.field-group{margin-bottom:14px}.btn{border:none;border-radius:3px;background:#1976d2;color:#fff;padding:10px 14px;font-size:11px;font-weight:600}.btn.full{width:100%}.btn.outline{background:#fff;color:#1976d2;border:1px solid #1976d2}
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}.metric{border:1px solid #ddd;border-radius:6px;padding:14px;background:#fff}.metric .n{font-size:25px;font-weight:600}.metric .l{font-size:10px;color:#777;margin-top:4px}.metric .delta{font-size:9px;color:#2e7d32;margin-top:6px}
+  .panel{border:1px solid #ddd;border-radius:7px;background:#fff;padding:16px;margin-bottom:16px}.panel h3{font-size:15px;margin:0 0 12px}.chart-row{display:grid;grid-template-columns:190px 1fr 52px;gap:10px;align-items:center;margin:12px 0}.chart-label{font-size:11px}.track{height:12px;background:#edf0f2;border-radius:7px;overflow:hidden}.bar{height:100%;background:#1976d2;border-radius:7px}.pct{font-size:11px;text-align:right;font-weight:600;color:#555}.chart-note{font-size:10px;color:#777;margin-top:8px}
+  table{width:100%;border-collapse:collapse;font-size:10px}th{text-align:left;color:#666;font-weight:600;background:#fafafa;border-bottom:1px solid #ddd;padding:8px}td{border-bottom:1px solid #eee;padding:9px 8px;vertical-align:top}.badge{display:inline-block;border-radius:12px;padding:3px 8px;font-size:9px;font-weight:700}.create{background:#e3f2fd;color:#1565c0}.approve{background:#e8f5e9;color:#2e7d32}.reject{background:#ffebee;color:#c62828}.maint{background:#ede7f6;color:#5e35b1}
+  .side-box{border:1px solid #e1e1e1;border-radius:6px;padding:14px;background:#fafafa;margin-bottom:14px}.side-box h3{font-size:13px;margin:0 0 10px}.audit{display:grid;grid-template-columns:9px 1fr;gap:9px;margin-bottom:11px}.dot{width:8px;height:8px;border-radius:50%;background:#1976d2;margin-top:4px}.audit .t{font-size:10px;color:#777}.audit .d{font-size:11px;line-height:1.4}.export{display:flex;gap:8px}.note{font-size:11px;color:#555;line-height:1.5}
+</style>
+</head>
+<body>
+<header class="appbar">
+  <div class="brand"><h1>CoastLink Facilities</h1><p>Community Facility &amp; Maintenance Management System</p></div>
+  <nav class="tabs"><div class="tab">Book</div><div class="tab">My Booking</div><div class="tab">Staff</div><div class="tab">Maintenance</div><div class="tab active">Reports</div></nav>
+  <div class="chip">Complete Design</div>
+</header>
+<main class="page">
+  <section>
+    <h2>Reports</h2>
+    <p class="lead">Review facility utilisation and trace significant operational actions.</p>
+    <div class="field-group"><label>Date range</label><select class="select"><option>1 Sep – 30 Sep 2026</option><option>Last 7 days</option><option>Last 90 days</option></select></div>
+    <div class="field-group"><label>Facility</label><select class="select"><option>All facilities</option><option>Coral Bay Meeting Room</option><option>Oceanview Community Hall</option></select></div>
+    <div class="field-group"><label>Report type</label><select class="select"><option>Utilisation & audit</option><option>Bookings only</option><option>Maintenance only</option></select></div>
+    <button class="btn full">APPLY FILTERS</button>
+  </section>
+
+  <section>
+    <div class="section-title">Utilisation overview</div>
+    <div class="metrics">
+      <div class="metric"><div class="n">68%</div><div class="l">Average utilisation</div><div class="delta">+6% vs previous month</div></div>
+      <div class="metric"><div class="n">184</div><div class="l">Approved bookings</div><div class="delta">+18 bookings</div></div>
+      <div class="metric"><div class="n">23</div><div class="l">Conflicts prevented</div><div class="delta">12.5% of requests</div></div>
+      <div class="metric"><div class="n">11</div><div class="l">Maintenance closures</div><div class="delta">7 resolved on time</div></div>
+    </div>
+    <div class="panel">
+      <h3>Facility utilisation</h3>
+      <div class="chart-row"><div class="chart-label">Oceanview Community Hall</div><div class="track"><div class="bar" style="width:86%"></div></div><div class="pct">86%</div></div>
+      <div class="chart-row"><div class="chart-label">Harbour Sports Court</div><div class="track"><div class="bar" style="width:78%"></div></div><div class="pct">78%</div></div>
+      <div class="chart-row"><div class="chart-label">Coral Bay Meeting Room</div><div class="track"><div class="bar" style="width:72%"></div></div><div class="pct">72%</div></div>
+      <div class="chart-row"><div class="chart-label">Lakeside Function Room</div><div class="track"><div class="bar" style="width:64%"></div></div><div class="pct">64%</div></div>
+      <div class="chart-row"><div class="chart-label">Northside Activity Room</div><div class="track"><div class="bar" style="width:58%"></div></div><div class="pct">58%</div></div>
+      <div class="chart-row"><div class="chart-label">Seaview Workshop Studio</div><div class="track"><div class="bar" style="width:49%"></div></div><div class="pct">49%</div></div>
+      <div class="chart-note">Utilisation = booked hours ÷ available operating hours for the selected period.</div>
+    </div>
+    <div class="panel">
+      <h3>Recent audit records</h3>
+      <table>
+        <thead><tr><th>Time</th><th>Actor</th><th>Action</th><th>Reference</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>30 Sep 16:42</td><td>Staff user</td><td><span class="badge approve">APPROVED</span></td><td>CL-39D1AF</td><td>Booking approved for Coral Bay Meeting Room.</td></tr>
+          <tr><td>30 Sep 15:17</td><td>Community user</td><td><span class="badge create">CREATED</span></td><td>CL-39D1AF</td><td>Booking request submitted for 3 Oct, 14:00–16:00.</td></tr>
+          <tr><td>30 Sep 11:04</td><td>Facility admin</td><td><span class="badge maint">MAINTENANCE</span></td><td>MT-1018</td><td>Temporary closure recorded for Seaview Workshop Studio.</td></tr>
+          <tr><td>29 Sep 17:25</td><td>Staff user</td><td><span class="badge reject">REJECTED</span></td><td>CL-284CC0</td><td>Booking rejected due to facility closure.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <aside>
+    <div class="side-box"><h3>Activity summary</h3><div class="audit"><span class="dot"></span><div><div class="d"><strong>Booking approvals</strong></div><div class="t">184 actions</div></div></div><div class="audit"><span class="dot"></span><div><div class="d"><strong>Booking rejections</strong></div><div class="t">21 actions</div></div></div><div class="audit"><span class="dot"></span><div><div class="d"><strong>Maintenance updates</strong></div><div class="t">46 actions</div></div></div><div class="audit"><span class="dot"></span><div><div class="d"><strong>Facility closures</strong></div><div class="t">11 actions</div></div></div></div>
+    <div class="side-box"><h3>Export</h3><p class="note">Export the filtered operational summary for management review or audit preparation.</p><div class="export"><button class="btn">EXPORT CSV</button><button class="btn outline">PDF</button></div></div>
+    <div class="side-box"><h3>Audit traceability</h3><p class="note">Significant booking and maintenance actions are recorded with time, actor, reference and action details.</p></div>
+  </aside>
+</main>
+</body>
+</html>

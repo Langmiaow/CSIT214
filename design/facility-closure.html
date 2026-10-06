@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CoastLink Facilities – Facility Closure & Affected Bookings</title>
+<style>
+  *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Montserrat,"Segoe UI",Arial,sans-serif;color:#111;background:#fff} body{font-size:14px}
+  .appbar{height:76px;background:#f4f6f8;border-bottom:1px solid #ddd;display:flex;align-items:center;padding:0 32px;gap:28px}.brand{flex:1}.brand h1{font-size:19px;font-weight:500;margin:0 0 3px}.brand p{margin:0;color:#6b7280;font-size:11px}
+  .tabs{display:flex;height:76px;align-items:stretch}.tab{display:flex;align-items:center;padding:0 16px;font-size:12px;color:#5f6368;border-bottom:2px solid transparent}.tab.active{color:#1976d2;border-bottom-color:#1976d2;font-weight:600}.chip{border:1px solid #aaa;border-radius:16px;padding:4px 10px;font-size:11px;color:#555;background:#fff}
+  .page{display:grid;grid-template-columns:260px minmax(650px,1fr) 290px;gap:32px;padding:46px 32px 28px;align-items:start}h2{font-size:28px;font-weight:500;margin:0 0 6px}.lead{color:#6b7280;font-size:12px;line-height:1.45;margin:0 0 22px}.section-title{font-size:18px;font-weight:500;margin:0 0 12px}
+  label{display:block;font-size:11px;color:#666;margin:0 0 5px}.field,.select,.textarea{width:100%;border:1px solid #cfcfcf;border-radius:4px;background:#fff;padding:9px 10px;font:inherit;font-size:12px;color:#222}.textarea{height:76px;resize:none}.field-group{margin-bottom:14px}.btn{border:none;border-radius:3px;background:#1976d2;color:#fff;padding:10px 14px;font-size:11px;font-weight:600}.btn.full{width:100%}.btn.outline{background:#fff;color:#1976d2;border:1px solid #1976d2}.btn.danger{background:#c62828}.btn.muted{background:#fff;color:#555;border:1px solid #bbb}
+  .panel{border:1px solid #ddd;border-radius:7px;background:#fff;padding:16px;margin-bottom:14px}.panel h3{font-size:15px;margin:0 0 10px}.impact{background:#fff8e1;border:1px solid #ffe0a3}.impact strong{color:#b26a00}.banner{background:#ffebee;border-left:4px solid #c62828;padding:11px 12px;border-radius:3px;margin-bottom:14px;font-size:11px;line-height:1.45;color:#7f1d1d}
+  .summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}.metric{border:1px solid #ddd;border-radius:6px;padding:12px}.metric .n{font-size:23px;font-weight:600}.metric .l{font-size:10px;color:#777;margin-top:3px}
+  table{width:100%;border-collapse:collapse;font-size:11px}th{text-align:left;color:#666;font-weight:600;background:#fafafa;border-bottom:1px solid #ddd;padding:9px 8px}td{border-bottom:1px solid #eee;padding:10px 8px;vertical-align:top}.badge{display:inline-block;border-radius:12px;padding:3px 8px;font-size:9px;font-weight:700}.pending{background:#fff3e0;color:#ef6c00}.approved{background:#e8f5e9;color:#2e7d32}.action{background:#e3f2fd;color:#1565c0}.row-actions{display:flex;gap:7px;margin-top:15px}.side-box{border:1px solid #e1e1e1;border-radius:6px;padding:14px;background:#fafafa;margin-bottom:14px}.side-box h3{font-size:13px;margin:0 0 10px}.stat{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eee;font-size:11px}.stat:last-child{border-bottom:none}.small{font-size:11px;color:#555;line-height:1.5}.timeline{padding-left:15px;margin:8px 0}.timeline li{font-size:11px;color:#555;margin-bottom:8px}
+</style>
+</head>
+<body>
+<header class="appbar">
+  <div class="brand"><h1>CoastLink Facilities</h1><p>Community Facility &amp; Maintenance Management System</p></div>
+  <nav class="tabs"><div class="tab">Book</div><div class="tab">My Booking</div><div class="tab">Staff</div><div class="tab active">Closures</div><div class="tab">Reports</div></nav>
+  <div class="chip">Complete Design</div>
+</header>
+<main class="page">
+  <section>
+    <h2>Facility closure</h2>
+    <p class="lead">Record temporary closures and review bookings that require follow-up.</p>
+    <div class="field-group"><label>Facility</label><select class="select"><option>Oceanview Community Hall</option><option>Harbour Sports Court</option></select></div>
+    <div class="field-group"><label>Closure starts</label><input class="field" value="08/10/2026 08:00" /></div>
+    <div class="field-group"><label>Closure ends</label><input class="field" value="08/10/2026 17:00" /></div>
+    <div class="field-group"><label>Reason</label><textarea class="textarea">HVAC system requires urgent repair and the main hall cannot be safely used during works.</textarea></div>
+    <button class="btn full">CHECK IMPACT</button>
+  </section>
+
+  <section>
+    <div class="section-title">Closure impact preview</div>
+    <div class="banner"><strong>3 affected bookings identified.</strong> The selected facility will be unavailable during the proposed closure window. Existing bookings require Council follow-up before the closure is confirmed.</div>
+    <div class="summary-grid">
+      <div class="metric"><div class="n">3</div><div class="l">Affected bookings</div></div>
+      <div class="metric"><div class="n">87</div><div class="l">Expected attendees</div></div>
+      <div class="metric"><div class="n">1</div><div class="l">Alternative facility available</div></div>
+    </div>
+    <div class="panel">
+      <h3>Affected bookings</h3>
+      <table>
+        <thead><tr><th>Reference</th><th>Time</th><th>Requester</th><th>Status</th><th>Recommended action</th></tr></thead>
+        <tbody>
+          <tr><td><strong>CL-A91F2C</strong></td><td>09:00–11:00</td><td>Coastal Seniors Network<br><span class="small">35 attendees</span></td><td><span class="badge approved">APPROVED</span></td><td><span class="badge action">OFFER ALTERNATIVE</span><br><span class="small">Lakeside Function Room</span></td></tr>
+          <tr><td><strong>CL-7D42B8</strong></td><td>12:30–14:00</td><td>Community Health Workshop<br><span class="small">28 attendees</span></td><td><span class="badge pending">PENDING</span></td><td><span class="badge action">CONTACT REQUESTER</span><br><span class="small">No equivalent slot found</span></td></tr>
+          <tr><td><strong>CL-C1840D</strong></td><td>15:00–16:30</td><td>Oceanview Art Group<br><span class="small">24 attendees</span></td><td><span class="badge approved">APPROVED</span></td><td><span class="badge action">RESCHEDULE</span><br><span class="small">Next available: 9 Oct</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row-actions"><button class="btn danger">CONFIRM CLOSURE</button><button class="btn outline">EXPORT AFFECTED BOOKINGS</button><button class="btn muted">CANCEL</button></div>
+  </section>
+
+  <aside>
+    <div class="side-box"><h3>Closure summary</h3><div class="stat"><span>Facility</span><strong>Oceanview Hall</strong></div><div class="stat"><span>Duration</span><strong>9 hours</strong></div><div class="stat"><span>Affected</span><strong>3 bookings</strong></div><div class="stat"><span>Expected users</span><strong>87</strong></div></div>
+    <div class="side-box"><h3>Before confirming</h3><ol class="timeline"><li>Review all affected bookings.</li><li>Identify alternatives where possible.</li><li>Record the reason for closure.</li><li>Notify affected users after approval.</li></ol></div>
+    <div class="panel impact"><div class="small"><strong>Operational impact</strong><br>New bookings will be blocked for the closure window. Existing bookings remain visible until follow-up action is recorded.</div></div>
+  </aside>
+</main>
+</body>
+</html>

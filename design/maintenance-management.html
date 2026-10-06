@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CoastLink Facilities – Maintenance Management</title>
+<style>
+  *{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Montserrat,"Segoe UI",Arial,sans-serif;color:#111;background:#fff}
+  body{font-size:14px}
+  .appbar{height:76px;background:#f4f6f8;border-bottom:1px solid #ddd;display:flex;align-items:center;padding:0 32px;gap:28px}
+  .brand{flex:1}.brand h1{font-size:19px;font-weight:500;margin:0 0 3px}.brand p{margin:0;color:#6b7280;font-size:11px}
+  .tabs{display:flex;height:76px;align-items:stretch}.tab{display:flex;align-items:center;padding:0 16px;font-size:12px;color:#5f6368;border-bottom:2px solid transparent}.tab.active{color:#1976d2;border-bottom-color:#1976d2;font-weight:600}
+  .chip{border:1px solid #aaa;border-radius:16px;padding:4px 10px;font-size:11px;color:#555;background:#fff}
+  .page{display:grid;grid-template-columns:250px minmax(620px,1fr) 280px;gap:32px;padding:46px 32px 28px;align-items:start}
+  h2{font-size:28px;font-weight:500;margin:0 0 6px}.lead{color:#6b7280;font-size:12px;line-height:1.45;margin:0 0 22px}.section-title{font-size:18px;font-weight:500;margin:0 0 12px}
+  label{display:block;font-size:11px;color:#666;margin:0 0 5px}.field,.select,.textarea{width:100%;border:1px solid #cfcfcf;border-radius:4px;background:#fff;padding:9px 10px;font:inherit;font-size:12px;color:#222}.select{height:36px}.textarea{height:74px;resize:none}
+  .field-group{margin-bottom:14px}.btn{border:none;border-radius:3px;background:#1976d2;color:#fff;padding:10px 14px;font-size:11px;font-weight:600;letter-spacing:.2px;cursor:default}.btn.full{width:100%}.btn.outline{background:#fff;color:#1976d2;border:1px solid #1976d2}.btn.danger{background:#fff;color:#c62828;border:1px solid #c62828}.btn.muted{background:#fff;color:#555;border:1px solid #bbb}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.count{font-size:11px;color:#777}
+  .cards{display:grid;gap:12px}.card{border:1px solid #ddd;border-radius:7px;padding:14px 16px;background:#fff}.card.selected{border:2px solid #1976d2;padding:13px 15px}.row{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.title{font-size:15px;font-weight:600;margin-bottom:4px}.meta{font-size:11px;color:#70757a;line-height:1.45}.desc{font-size:12px;line-height:1.45;margin-top:8px}
+  .badge{display:inline-block;border-radius:12px;padding:3px 8px;font-size:10px;font-weight:700;white-space:nowrap}.pending{background:#fff3e0;color:#ef6c00}.open{background:#e3f2fd;color:#1565c0}.progress{background:#ede7f6;color:#5e35b1}.resolved{background:#e8f5e9;color:#2e7d32}.high{background:#ffebee;color:#c62828}.medium{background:#fff8e1;color:#f57f17}
+  .divider{border-top:1px solid #e5e7eb;margin:14px 0}.details{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}.kv .k{font-size:10px;color:#777;margin-bottom:2px}.kv .v{font-size:12px;font-weight:500}
+  .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .side-box{border:1px solid #e1e1e1;border-radius:6px;padding:14px;background:#fafafa;margin-bottom:14px}.side-box h3{font-size:13px;margin:0 0 10px}.side-box p,.side-box li{font-size:11px;line-height:1.5;color:#555}.side-box ul{padding-left:18px;margin:0}.stat{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #eee;font-size:11px}.stat:last-child{border-bottom:none}.stat strong{font-size:12px}
+  .note{background:#e8f4fd;border-left:3px solid #1976d2;padding:10px 12px;font-size:11px;line-height:1.45;color:#375a7f}
+  @media(max-width:1100px){.page{grid-template-columns:220px 1fr}.right{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:16px}.tabs .tab:nth-child(-n+3){display:none}}
+</style>
+</head>
+<body>
+<header class="appbar">
+  <div class="brand"><h1>CoastLink Facilities</h1><p>Community Facility &amp; Maintenance Management System</p></div>
+  <nav class="tabs">
+    <div class="tab">Book</div><div class="tab">My Booking</div><div class="tab">Staff</div><div class="tab active">Maintenance</div><div class="tab">Reports</div>
+  </nav>
+  <div class="chip">Complete Design</div>
+</header>
+<main class="page">
+  <section>
+    <h2>Maintenance</h2>
+    <p class="lead">Review reported facility issues, assign work and track operational status.</p>
+    <div class="field-group"><label>Search</label><input class="field" value="" placeholder="Issue, facility, contractor..." /></div>
+    <div class="field-group"><label>Status</label><select class="select"><option>All active issues</option><option>Open</option><option>Assigned</option><option>In progress</option></select></div>
+    <div class="field-group"><label>Priority</label><select class="select"><option>All priorities</option><option>High</option><option>Medium</option><option>Low</option></select></div>
+    <div class="field-group"><label>Facility</label><select class="select"><option>All facilities</option><option>Oceanview Community Hall</option><option>Harbour Sports Court</option></select></div>
+    <button class="btn full">FILTER ISSUES</button>
+  </section>
+
+  <section>
+    <div class="toolbar"><div class="section-title">Maintenance issues</div><div class="count">4 active</div></div>
+    <div class="cards">
+      <article class="card selected">
+        <div class="row"><div><div class="title">Air-conditioning not cooling</div><div class="meta">MT-1027 · Oceanview Community Hall · Reported 6 Oct 2026, 09:12</div></div><div><span class="badge high">HIGH</span> <span class="badge open">OPEN</span></div></div>
+        <div class="desc">Main hall temperature remains above acceptable range during afternoon bookings.</div>
+        <div class="divider"></div>
+        <div class="details">
+          <div class="kv"><div class="k">Reported by</div><div class="v">Facility Administration</div></div>
+          <div class="kv"><div class="k">Category</div><div class="v">HVAC</div></div>
+          <div class="kv"><div class="k">Assigned to</div><div class="v">Not assigned</div></div>
+          <div class="kv"><div class="k">Target response</div><div class="v">Within 4 hours</div></div>
+        </div>
+        <div class="actions"><button class="btn">ASSIGN TASK</button><button class="btn outline">MARK IN PROGRESS</button><button class="btn muted">VIEW FACILITY</button></div>
+      </article>
+      <article class="card"><div class="row"><div><div class="title">Court lighting fault</div><div class="meta">MT-1024 · Harbour Sports Court · Reported 5 Oct 2026, 18:40</div></div><div><span class="badge medium">MEDIUM</span> <span class="badge progress">IN PROGRESS</span></div></div><div class="desc">Two lights on Court 2 are intermittently switching off during evening use.</div></article>
+      <article class="card"><div class="row"><div><div class="title">Meeting room projector unavailable</div><div class="meta">MT-1021 · Coral Bay Meeting Room · Reported 5 Oct 2026, 10:03</div></div><div><span class="badge medium">MEDIUM</span> <span class="badge pending">ASSIGNED</span></div></div><div class="desc">Projector powers on but no image is displayed from the room input panel.</div></article>
+      <article class="card"><div class="row"><div><div class="title">Loose external handrail</div><div class="meta">MT-1019 · Lakeside Function Room · Reported 4 Oct 2026, 15:25</div></div><div><span class="badge high">HIGH</span> <span class="badge progress">IN PROGRESS</span></div></div><div class="desc">Handrail near the eastern entrance requires urgent inspection before further public use.</div></article>
+    </div>
+  </section>
+
+  <aside class="right">
+    <div class="side-box"><h3>Maintenance summary</h3><div class="stat"><span>Open</span><strong>1</strong></div><div class="stat"><span>Assigned</span><strong>1</strong></div><div class="stat"><span>In progress</span><strong>2</strong></div><div class="stat"><span>High priority</span><strong>2</strong></div></div>
+    <div class="side-box"><h3>Selected issue</h3><p><strong>Oceanview Community Hall</strong></p><p>Current booking status: 3 bookings today</p><p>No closure has been applied.</p><button class="btn danger full">CREATE FACILITY CLOSURE</button></div>
+    <div class="note">Maintenance issues can affect facility availability. A closure should be created when an issue makes a facility unsafe or unavailable for bookings.</div>
+  </aside>
+</main>
+</body>
+</html>
